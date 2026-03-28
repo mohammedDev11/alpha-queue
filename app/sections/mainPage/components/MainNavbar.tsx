@@ -119,33 +119,32 @@
 // ============New==============
 "use client";
 
-import { useState } from "react";
 import ThemeToggle from "@/app/components/shared/actions/ThemeToggle";
-import Content from "./Content";
+import GlowButton from "@/app/components/ui/button/GlowButton";
+import IconLabelButton from "@/app/components/ui/button/IconLabelButton";
+import TutorialVideoPreview from "@/app/components/ui/card/TutorialVideoCard";
+import Modal from "@/app/components/ui/modal/Modal";
+import { useState } from "react";
+import { FaRegUser } from "react-icons/fa";
+import Content from "../Content";
+import SSO from "../sections/SSO";
 import {
-  Navbar,
+  MobileNav,
+  MobileNavHeader,
+  MobileNavMenu,
+  MobileNavToggle,
   NavBody,
   NavItems,
-  MobileNav,
-  NavbarLogo,
+  Navbar,
   NavbarButton,
-  MobileNavHeader,
-  MobileNavToggle,
-  MobileNavMenu,
+  NavbarLogo,
 } from "./Navbar";
-import IconLabelButton from "@/app/components/ui/button/IconLabelButton";
-import { FaRegUser } from "react-icons/fa";
-import Modal from "@/app/components/ui/modal/Modal";
-import SSO from "./SSO";
-import GlowButton from "@/app/components/ui/button/GlowButton";
-import TutorialVideoPreview from "@/app/components/ui/card/TutorialVideoCard";
 
 export function MainNavbar() {
   const navItems = [
     { name: "Features", link: "#features" },
     { name: "How It Works", link: "#how-it-works" },
     { name: "Web Print", link: "#web-print" },
-    { name: "Pricing", link: "#pricing" },
     { name: "FAQ", link: "#faq" },
     { name: "Contact", link: "#contact" },
   ];

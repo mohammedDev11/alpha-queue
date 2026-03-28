@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-/* ========= DESIGN ================ */
 @theme {
   --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
 
@@ -41,6 +40,19 @@
   --color-inactive-100: #d7e2f1;
   --color-inactive-500: #64748b;
   --color-inactive-900: #1e293b;
+
+  /* Spotlight animation */
+  --animate-spotlight: spotlight 1.4s ease-out 0.15s forwards;
+}
+@keyframes spotlight {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-6%) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
 }
 
 /* =========== LIGHT / DARK ============ */

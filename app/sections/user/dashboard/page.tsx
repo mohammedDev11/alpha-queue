@@ -1,11 +1,10 @@
 "use client";
 
-import React from "react";
-import UserTopCards from "./components/UserTopCards";
-import PageIntro from "@/app/components/shared/page/PageIntro";
+import PageIntro from "@/app/components/shared/page/Text/PageIntro";
 import UserDashboardCharts from "./components/UserDashboardCharts";
 import UserInformationCard from "./components/UserInformationCard";
 import UserQuickActionsCard from "./components/UserQuickActionsCard";
+import UserTopCards from "./components/UserTopCards";
 
 const page = () => {
   return (

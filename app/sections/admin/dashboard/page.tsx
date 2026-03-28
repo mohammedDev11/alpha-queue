@@ -5,12 +5,12 @@ import {
   summaryChartData,
   summaryMetricsConfig,
 } from "@/Data/Admin/dashboard/dashboard";
-import PageIntro from "@/app/components/shared/page/PageIntro";
 import GeneralDonutChart from "@/app/components/shared/charts/GeneralDonutChart";
 import GeneralLineChart from "@/app/components/shared/charts/GeneralLineChart";
+import PageIntro from "@/app/components/shared/page/Text/PageIntro";
+import { useState } from "react";
 import PrinterStatusTable from "./PrinterStatusTable";
 import TopCards from "./TopCards";
-import { useState } from "react";
 
 const Page = () => {
   const [filter, setFilter] =

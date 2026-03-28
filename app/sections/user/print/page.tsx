@@ -1,9 +1,9 @@
 "use client";
 
-import PageIntro from "@/app/components/shared/page/PageIntro";
-import React, { useState } from "react";
-import { FileUploadDemo } from "./components/FileUploadDemo";
+import PageIntro from "@/app/components/shared/page/Text/PageIntro";
 import Button from "@/app/components/ui/button/Button";
+import { useState } from "react";
+import { FileUploadDemo } from "./components/FileUploadDemo";
 import PrintJobModal from "./components/PrintJobModal";
 
 const Page = () => {

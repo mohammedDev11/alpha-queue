@@ -272,8 +272,7 @@
 // }
 
 //===========New==========
-import PageIntro from "@/app/components/shared/page/PageIntro";
-import React from "react";
+import PageIntro from "@/app/components/shared/page/Text/PageIntro";
 import UserAccountsTable from "./components/UserAccountsTable";
 
 const page = () => {

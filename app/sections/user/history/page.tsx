@@ -1,6 +1,5 @@
-import React from "react";
+import PageIntro from "@/app/components/shared/page/Text/PageIntro";
 import UserTransactionHistoryTable from "./components/TransactionTypeBadge";
-import PageIntro from "@/app/components/shared/page/PageIntro";
 
 const page = () => {
   return (

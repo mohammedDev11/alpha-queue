@@ -1,6 +1,5 @@
-import React from "react";
+import PageIntro from "@/app/components/shared/page/Text/PageIntro";
 import JobsPendingReleaseTable from "./components/JobsPendingReleaseTable";
-import PageIntro from "@/app/components/shared/page/PageIntro";
 
 const page = () => {
   return (

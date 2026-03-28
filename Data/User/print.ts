@@ -11,3 +11,43 @@ export const webPrintPrinterOptions: WebPrintPrinterOption[] = [
   { label: "Computer Lab Printer", value: "computer-lab-printer" },
   { label: "Library Printing Station", value: "library-printing-station" },
 ];
+
+//===========Actions=============
+import {
+  IconEye,
+  IconPlus,
+  IconTrash,
+  IconDeviceFloppy,
+  IconSparkles,
+} from "@tabler/icons-react";
+
+export const printUploadTopActions = [
+  {
+    id: "add-files",
+    label: "Add files",
+    icon: IconPlus,
+  },
+  {
+    id: "save-draft",
+    label: "Save draft",
+    icon: IconDeviceFloppy,
+  },
+  {
+    id: "smart-fix",
+    label: "Smart fix",
+    icon: IconSparkles,
+  },
+];
+
+export const printUploadFileActions = [
+  {
+    id: "preview-file",
+    label: "Preview",
+    icon: IconEye,
+  },
+  {
+    id: "delete-file",
+    label: "Delete",
+    icon: IconTrash,
+  },
+];

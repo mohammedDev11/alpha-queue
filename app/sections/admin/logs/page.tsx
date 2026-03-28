@@ -1,5 +1,4 @@
-import PageIntro from "@/app/components/shared/page/PageIntro";
-import React from "react";
+import PageIntro from "@/app/components/shared/page/Text/PageIntro";
 import ActivityLogTable from "./components/ActivityLogTable";
 
 const page = () => {

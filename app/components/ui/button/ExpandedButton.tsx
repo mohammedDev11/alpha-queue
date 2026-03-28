@@ -1,3 +1,4 @@
+//==========This is working=====================
 // import React from "react";
 // import type { IconType } from "react-icons";
 
@@ -7,6 +8,7 @@
 //   icon: IconType;
 //   className?: string;
 //   onClick?: () => void;
+//   variant?: "default" | "ghost";
 // };
 
 // const ExpandedButton: React.FC<ExpandedButtonProps> = ({
@@ -14,20 +16,26 @@
 //   icon: Icon,
 //   className = "",
 //   onClick,
+//   variant = "default",
 // }) => {
+//   const variantStyles = {
+//     default: "bg-brand-500 text-white",
+//     ghost: "bg-transparent", // ✅ removed color control
+//   };
+
 //   return (
 //     <button
 //       type="button"
 //       onClick={onClick}
 //       className={`
-//       group flex items-center overflow-hidden rounded-md
-//       bg-brand-500 text-white
-//       transition-all duration-700 hover:scale-105 p-2 cursor-pointer
-//       ${className}
-//     `}
+//         group flex items-center overflow-hidden rounded-md
+//         transition-all duration-500 hover:scale-105 px-2 py-1 cursor-pointer
+//         ${variantStyles[variant]}
+//         ${className}
+//       `}
 //     >
 //       <div className="flex h-10 w-10 items-center justify-center">
-//         <Icon size={25} />
+//         <Icon size={18} />
 //       </div>
 
 //       <span
@@ -46,16 +54,19 @@
 
 // export default ExpandedButton;
 
+//===========NEW================
 import React from "react";
 import type { IconType } from "react-icons";
+import { cn } from "../../lib/cn";
 
 type ExpandedButtonProps = {
   id: string;
   label: string;
   icon: IconType;
   className?: string;
-  onClick?: () => void;
-  variant?: "default" | "ghost";
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  variant?: "default" | "ghost" | "surface" | "danger";
+  iconSize?: number;
 };
 
 const ExpandedButton: React.FC<ExpandedButtonProps> = ({
@@ -64,33 +75,38 @@ const ExpandedButton: React.FC<ExpandedButtonProps> = ({
   className = "",
   onClick,
   variant = "default",
+  iconSize = 18,
 }) => {
+  const baseStyles =
+    "group inline-flex items-center overflow-hidden rounded-md border transition-all duration-500 cursor-pointer";
+
   const variantStyles = {
-    default: "bg-brand-500 text-white",
-    ghost: "bg-transparent", // ✅ removed color control
+    default:
+      "bg-brand-500 text-white border-transparent hover:bg-brand-600 hover:shadow-brand",
+    ghost:
+      "bg-transparent text-[var(--foreground)] border-transparent hover:bg-[var(--surface-2)]",
+    surface:
+      "bg-[var(--surface-2)] text-[var(--foreground)] border-[var(--border)] hover:bg-brand-500 hover:text-white hover:border-transparent",
+    danger:
+      "bg-[var(--surface-2)] text-[var(--foreground)] border-[var(--border)] hover:bg-[var(--color-danger-500)] hover:text-white hover:border-transparent",
   };
 
   return (
     <button
       type="button"
       onClick={onClick}
-      className={`
-        group flex items-center overflow-hidden rounded-md
-        transition-all duration-500 hover:scale-105 px-2 py-1 cursor-pointer
-        ${variantStyles[variant]}
-        ${className}
-      `}
+      className={cn(baseStyles, variantStyles[variant], "px-2 py-1", className)}
     >
-      <div className="flex h-10 w-10 items-center justify-center">
-        <Icon size={18} />
+      <div className="flex h-9 w-9 shrink-0 items-center justify-center">
+        <Icon size={iconSize} />
       </div>
 
       <span
         className="
-          max-w-0 overflow-hidden whitespace-nowrap text-sm
-          transition-all duration-700
+          max-w-0 overflow-hidden whitespace-nowrap text-sm font-medium
+          transition-all duration-500
           group-hover:max-w-[140px]
-          group-hover:pr-4
+          group-hover:pr-3
         "
       >
         {label}

@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
-import { ArrowLeftRight, Wallet } from "lucide-react";
-import PageIntro from "@/app/components/shared/page/PageIntro";
 import SegmentToggle from "@/app/components/shared/actions/SegmentToggle";
+import PageIntro from "@/app/components/shared/page/Text/PageIntro";
+import { ArrowLeftRight, Wallet } from "lucide-react";
+import { useState } from "react";
 import SharedAccountsTable from "./tables/SharedAccountsTable";
 import TransactionsTable from "./tables/TransactionsTable";
 // import SharedAccountsTable from "./tables/SharedAccountsTable";

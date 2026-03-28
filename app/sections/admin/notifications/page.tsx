@@ -13,24 +13,24 @@
  * - Pass data to child components
  */
 
-import React, { useEffect, useMemo, useState } from "react";
-import PageIntro from "@/app/components/shared/page/PageIntro";
+import PageIntro from "@/app/components/shared/page/Text/PageIntro";
+import { useEffect, useMemo, useState } from "react";
 
 // Feature components
+import NotificationSettingsPanel from "./components/NotificationSettingsPanel";
 import NotificationSummaryCards from "./components/NotificationSummaryCards";
 import NotificationTable from "./components/NotificationTable";
-import NotificationSettingsPanel from "./components/NotificationSettingsPanel";
 
 // Data + types (acts as mock backend)
 import {
   DEFAULT_NOTIFICATION_FILTERS,
   INITIAL_NOTIFICATIONS,
   INITIAL_NOTIFICATION_SETTINGS,
+  NOTIFICATION_TABS,
   Notification,
   NotificationFilters,
   NotificationSettingsType,
   NotificationStatus,
-  NOTIFICATION_TABS,
   NotificationTab,
   TOTAL_SECONDS,
 } from "@/Data/Admin/notifications";
@@ -46,8 +46,9 @@ export default function NotificationsPage() {
   const [tab, setTab] = useState<NotificationTab>("Notifications");
 
   // Notification list (mock data source)
-  const [notifications, setNotifications] =
-    useState<Notification[]>(INITIAL_NOTIFICATIONS);
+  const [notifications, setNotifications] = useState<Notification[]>(
+    INITIAL_NOTIFICATIONS
+  );
 
   // Filters (search, type, severity, etc.)
   const [filters, setFilters] = useState<NotificationFilters>(
@@ -55,8 +56,9 @@ export default function NotificationsPage() {
   );
 
   // Notification settings (toggles + thresholds)
-  const [settings, setSettings] =
-    useState<NotificationSettingsType>(INITIAL_NOTIFICATION_SETTINGS);
+  const [settings, setSettings] = useState<NotificationSettingsType>(
+    INITIAL_NOTIFICATION_SETTINGS
+  );
 
   // Refresh timer (used in RefreshTimer component)
   const [secondsLeft, setSecondsLeft] = useState(TOTAL_SECONDS);
@@ -129,12 +131,10 @@ export default function NotificationsPage() {
         notification.severity === filters.severity;
 
       const matchesStatus =
-        filters.status === "all" ||
-        notification.status === filters.status;
+        filters.status === "all" || notification.status === filters.status;
 
       const matchesSource =
-        filters.source === "all" ||
-        notification.source === filters.source;
+        filters.source === "all" || notification.source === filters.source;
 
       return (
         matchesSearch &&
@@ -161,9 +161,7 @@ export default function NotificationsPage() {
     status: NotificationStatus
   ) => {
     setNotifications((prev) =>
-      prev.map((item) =>
-        ids.includes(item.id) ? { ...item, status } : item
-      )
+      prev.map((item) => (ids.includes(item.id) ? { ...item, status } : item))
     );
 
     // Clear selection after action
@@ -174,9 +172,7 @@ export default function NotificationsPage() {
    * Delete notifications (single or bulk)
    */
   const deleteNotifications = (ids: string[]) => {
-    setNotifications((prev) =>
-      prev.filter((item) => !ids.includes(item.id))
-    );
+    setNotifications((prev) => prev.filter((item) => !ids.includes(item.id)));
 
     setSelectedIds([]);
   };
@@ -246,20 +242,14 @@ export default function NotificationsPage() {
             setSelectedIds={setSelectedIds}
             secondsLeft={secondsLeft}
             onRefreshNow={handleRefreshNow}
-
             // Bulk actions
             onBulkRead={(ids) => updateNotificationStatus(ids, "read")}
             onBulkResolve={(ids) => updateNotificationStatus(ids, "resolved")}
             onBulkDismiss={(ids) => updateNotificationStatus(ids, "dismissed")}
             onBulkDelete={deleteNotifications}
-
             // Row actions
-            onResolveOne={(id) =>
-              updateNotificationStatus([id], "resolved")
-            }
-            onDismissOne={(id) =>
-              updateNotificationStatus([id], "dismissed")
-            }
+            onResolveOne={(id) => updateNotificationStatus([id], "resolved")}
+            onDismissOne={(id) => updateNotificationStatus([id], "dismissed")}
             onDeleteOne={(id) => deleteNotifications([id])}
           />
         </div>
