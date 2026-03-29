@@ -144,7 +144,7 @@ export function MainNavbar() {
   const navItems = [
     { name: "Features", link: "#features" },
     { name: "How It Works", link: "#how-it-works" },
-    { name: "Web Print", link: "#web-print" },
+    { name: "Secure & Private", link: "#secure-private" },
     { name: "FAQ", link: "#faq" },
     { name: "Contact", link: "#contact" },
   ];

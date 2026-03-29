@@ -1,22 +1,20 @@
 "use client";
 
-import React from "react";
+import { HoverFolderBadge } from "@/app/components/ui/badge/HoverFolderBadge";
 import {
-  IconFileTypePdf,
   IconFileTypeDocx,
+  IconFileTypePdf,
   IconFileTypeXls,
 } from "@tabler/icons-react";
-import { HoverFolderBadge } from "@/app/components/ui/badge/HoverFolderBadge";
+import SectionHeader from "../../components/SectionHeader";
 
 const Box2 = () => {
-  /* ========= TEXT CONFIG ========= */
   const content = {
     title: "Upload & Print Any File",
     description:
       "Easily upload PDF, Word, or Excel files to the secure print queue.",
   };
 
-  /* ========= FILES ========= */
   const files = [
     {
       id: "pdf",
@@ -39,28 +37,30 @@ const Box2 = () => {
   ];
 
   return (
-    <div className=" relative flex h-[360px] w-full flex-col items-center justify-between overflow-visible ">
-      {/* ===== CENTER (ANIMATION) ===== */}
-      <div className="flex flex-1 items-center justify-center">
+    <div className="flex w-full flex-col items-center justify-center gap-20 text-center">
+      {/* TEXT TOP */}
+      <SectionHeader
+        title={content.title}
+        description={content.description}
+        size="sm"
+        align="center"
+      />
+
+      {/* FOLDER CENTER */}
+      <div className="mt-8 flex items-center justify-center">
         <HoverFolderBadge
           text=""
           items={files}
-          className="overflow-visible bg-transparent"
+          className="overflow-visible bg-transparent scale-[1.2]"
           enableTimerPreview={true}
           previewStartDelay={1000}
           previewOpenDuration={1200}
           previewInterval={8000}
           repeatPreview={true}
-          folderSize={{ width: 84, height: 62 }}
-          teaserCardSize={{ width: 38, height: 26 }}
-          hoverCardSize={{ width: 92, height: 64 }}
+          folderSize={{ width: 120, height: 90 }}
+          teaserCardSize={{ width: 56, height: 36 }}
+          hoverCardSize={{ width: 140, height: 100 }}
         />
-      </div>
-
-      {/* ===== BOTTOM TEXT ===== */}
-      <div className="text-start space-y-2 pb-2">
-        <h3 className="title-md">{content.title}</h3>
-        <p className="text-sm max-w-md mx-auto">{content.description}</p>
       </div>
     </div>
   );

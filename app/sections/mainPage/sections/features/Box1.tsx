@@ -1,37 +1,33 @@
-// // import { CardsGrid } from "@/app/components/ui/card/Cards";
-// import React from "react";
+"use client";
 
-// const Box1 = () => {
-//   const items = [
-//     {
-//       title: "Smart Printing",
-//       description: "Print faster and smarter with a clean workflow.",
-//       link: "#",
-//     },
-//     {
-//       title: "Secure Files",
-//       description: "Your files are protected before and after printing.",
-//       link: "#",
-//     },
-//     {
-//       title: "Queue Tracking",
-//       description: "Track your print jobs in real time.",
-//       link: "#",
-//     },
-//   ];
-
-//   return (
-//     <div className="section container">
-//       <Cards items={items} />
-//     </div>
-//   );
-// };
-
-// export default Box1;
-import React from "react";
+import SectionHeader from "../../components/SectionHeader";
+import SecurePrintQueuePreview from "./SecurePrintQueuePreview";
 
 const Box1 = () => {
-  return <div>Box1</div>;
+  const content = {
+    title: "Secure Print Queue",
+    description:
+      "Your documents stay protected until you authenticate and release them at the printer.",
+  };
+
+  return (
+    <div className="flex w-full flex-col items-center justify-center gap-12 text-center sm:gap-14 lg:gap-16">
+      {/* VISUAL TOP */}
+      <div className="mt-8 flex w-full items-center justify-center">
+        <div className="w-full max-w-[320px] sm:max-w-[400px] lg:max-w-[480px]">
+          <SecurePrintQueuePreview />
+        </div>
+      </div>
+
+      {/* TEXT BOTTOM */}
+      <SectionHeader
+        title={content.title}
+        description={content.description}
+        size="sm"
+        align="center"
+      />
+    </div>
+  );
 };
 
 export default Box1;
