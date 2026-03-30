@@ -3,7 +3,7 @@ import PrintersGrid from "./components/PrintersGrid";
 
 const page = () => {
   return (
-    <div>
+    <div className="space-y-10">
       <PageIntro
         title="Printers"
         description="Monitor printer health, status, and activity across all connected devices."

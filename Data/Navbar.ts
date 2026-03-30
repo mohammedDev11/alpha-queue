@@ -310,12 +310,6 @@ export const adminSidebarSections: SidebarSection[] = [
         href: "/sections/admin/settings",
         video: TEST_VIDEO,
       },
-      {
-        label: "About",
-        icon: RiInformationLine,
-        href: "/sections/about",
-        video: TEST_VIDEO,
-      },
 
       // ✅ NEW MAIN PAGE LINK
       {

@@ -1,12 +1,11 @@
 import PageIntro from "@/app/components/shared/page/Text/PageIntro";
-import React from "react";
 
 const page = () => {
   return (
     <div>
       <PageIntro
-        title="Profile"
-        description="View and manage your account details, personal information, and printing identity."
+        title="Settings"
+        description="Manage your account preferences, printing options, and personal configurations."
       />
     </div>
   );

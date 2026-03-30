@@ -1146,10 +1146,12 @@ export const FileUpload = ({
 
                 <motion.div
                   variants={secondaryVariant}
-                  className="absolute left-1/2 top-4 z-30 flex h-32 w-32 -translate-x-1/2 items-center justify-center rounded-2xl border border-dashed sm:h-36 sm:w-36"
+                  className="absolute left-1/2 top-4 z-30 flex -translate-x-1/2 items-center justify-center rounded-2xl border border-dashed sm:h-36 sm:w-36"
                   style={{
                     borderColor: "var(--color-brand-400)",
                     background: "transparent",
+                    width: "9rem",
+                    height: "8rem",
                   }}
                 />
 

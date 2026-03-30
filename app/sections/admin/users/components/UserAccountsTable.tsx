@@ -461,8 +461,8 @@ const UserAccountsTable = () => {
               return item.username.toLowerCase();
             case "fullName":
               return item.fullName.toLowerCase();
-            case "balance":
-              return item.balance;
+            case "quota":
+              return item.quota;
             case "restricted":
               return userRestrictedSortOrder[item.restricted];
             case "pages":
@@ -610,7 +610,7 @@ const UserAccountsTable = () => {
                       </TableCell>
 
                       <TableCell className="text-[32px] font-semibold text-[var(--title)] sm:text-base">
-                        {formatMoney(user.balance)}
+                        {formatMoney(user.quota)}
                       </TableCell>
 
                       <TableCell>
