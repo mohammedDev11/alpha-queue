@@ -1,14 +1,14 @@
 import { DonutChartItem } from "@/app/components/shared/charts/GeneralDonutChart";
 import {
-  DollarSign,
-  FileText,
-  Layers3,
   Clock3,
   CreditCard,
+  DollarSign,
+  FileText,
   IdCard,
+  Layers3,
+  Upload,
   User2,
   type LucideIcon,
-  Upload,
 } from "lucide-react";
 
 export type UserTopCard = {
@@ -34,9 +34,9 @@ export const userDashboardCardsByPeriod: Record<
   Today: [
     {
       id: 1,
-      title: "Current Balance",
-      value: "$24.50",
-      change: "+$5.00",
+      title: "Current Quota",
+      value: "24.50",
+      change: "+5.00",
       icon: DollarSign,
     },
     {
@@ -64,9 +64,9 @@ export const userDashboardCardsByPeriod: Record<
   "This Week": [
     {
       id: 1,
-      title: "Current Balance",
-      value: "$24.50",
-      change: "+$5.00",
+      title: "Current Quota",
+      value: "24.50",
+      change: "+5.00",
       icon: DollarSign,
     },
     {
@@ -94,9 +94,9 @@ export const userDashboardCardsByPeriod: Record<
   "This Month": [
     {
       id: 1,
-      title: "Current Balance",
-      value: "$24.50",
-      change: "+$12.00",
+      title: "Current Quota",
+      value: "24.50",
+      change: "$12.00",
       icon: DollarSign,
     },
     {
@@ -238,21 +238,14 @@ export const userInformationData: UserInfoItem[] = [
   {
     id: 1,
     label: "Name",
-    value: "Alex Johnson",
+    value: "Mohammed Alshammasi",
     icon: User2,
   },
   {
     id: 2,
     label: "User ID",
-    value: "USR-2024-0847",
+    value: "s202279720",
     icon: IdCard,
-  },
-  {
-    id: 3,
-    label: "Card ID",
-    value: "9382-4417-2059",
-    icon: CreditCard,
-    isSensitive: true,
   },
 ];
 

@@ -19,12 +19,13 @@ import {
 } from "@/app/components/shared/table/Table";
 import { cn } from "@/app/components/lib/cn";
 import {
-  pendingReleaseBalance,
   pendingReleaseJobs,
   pendingReleaseTableColumns,
   type PendingReleaseJob,
   type PendingReleaseSortKey,
+  pendingReleaseQuota,
 } from "@/Data/User/pending-jobs";
+import { FaMoneyCheck } from "react-icons/fa";
 
 type SortDir = "asc" | "desc";
 
@@ -123,13 +124,15 @@ const JobsPendingReleaseTable = () => {
 
           <div className="card inline-flex w-fit items-center gap-3 px-5 py-4">
             <span className="flex h-12 w-12 items-center justify-center rounded-md bg-brand-500/10 text-brand-500">
-              <span className="text-[30px] leading-none">$</span>
+              <span className="text-[30px] leading-none">
+                <FaMoneyCheck />
+              </span>
             </span>
 
             <div>
-              <p className="paragraph text-sm">Balance</p>
+              <p className="paragraph text-sm">Quota</p>
               <p className="title-md leading-none">
-                ${pendingReleaseBalance.toFixed(2)}
+                {pendingReleaseQuota.toFixed(2)}
               </p>
             </div>
           </div>
@@ -203,7 +206,7 @@ const JobsPendingReleaseTable = () => {
                         </TableCell>
 
                         <TableCell className="text-base font-medium text-[var(--title)]">
-                          ${job.cost.toFixed(2)}
+                          {job.cost.toFixed(2)}
                         </TableCell>
 
                         <TableCell>
@@ -226,7 +229,7 @@ const JobsPendingReleaseTable = () => {
               <p className="text-lg" style={{ color: "var(--paragraph)" }}>
                 {selectedIds.length} selected · Cost:{" "}
                 <span className="font-semibold text-[var(--title)]">
-                  ${selectedCost.toFixed(2)}
+                  {selectedCost.toFixed(2)}
                 </span>
               </p>
 
@@ -287,7 +290,7 @@ const JobsPendingReleaseTable = () => {
 
             <div>
               <p className="text-sm font-medium text-[var(--muted)]">Cost</p>
-              <p className="paragraph mt-1">${openJobModal?.cost.toFixed(2)}</p>
+              <p className="paragraph mt-1">{openJobModal?.cost.toFixed(2)}</p>
             </div>
 
             <div>

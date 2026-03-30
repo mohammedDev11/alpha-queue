@@ -289,7 +289,7 @@ const RecentPrintJobsTable = () => {
                       </TableCell>
 
                       <TableCell className="text-base font-medium text-[var(--title)]">
-                        ${job.cost.toFixed(2)}
+                        {job.cost.toFixed(2)}
                       </TableCell>
 
                       <TableCell>
@@ -379,7 +379,7 @@ const RecentPrintJobsTable = () => {
 
             <div>
               <p className="text-sm font-medium text-[var(--muted)]">Cost</p>
-              <p className="paragraph mt-1">${openJobModal?.cost.toFixed(2)}</p>
+              <p className="paragraph mt-1">{openJobModal?.cost.toFixed(2)}</p>
             </div>
 
             <div>

@@ -3,15 +3,43 @@
 import React, { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Eye, EyeOff, Sparkles } from "lucide-react";
+import { User2, IdCard } from "lucide-react";
 import Card from "@/app/components/ui/card/Card";
-import { userInformationData } from "@/Data/User/dashboard";
 
-const maskCardValue = (value: string) => {
+type UserInfoItem = {
+  id: number;
+  label: string;
+  value: string;
+  icon: React.ComponentType<{ size?: number | string; className?: string }>;
+  isSensitive?: boolean;
+};
+
+export const userInformationData: UserInfoItem[] = [
+  {
+    id: 1,
+    label: "Name",
+    value: "Mohammed Alshammasi",
+    icon: User2,
+  },
+  {
+    id: 2,
+    label: "User ID",
+    value: "s202279720",
+    icon: IdCard,
+    isSensitive: true,
+  },
+];
+
+const maskSensitiveValue = (value: string) => {
+  if (!value) return "";
+
   const clean = value.replace(/\s+/g, "");
-  if (clean.length <= 4) return "••••";
 
-  const lastFour = clean.slice(-4);
-  return `•••• •••• •••• ${lastFour}`;
+  if (clean.length <= 5) {
+    return `${clean[0] ?? ""}XXXXX`;
+  }
+
+  return `${clean.slice(0, 5)}XXXXX`;
 };
 
 const UserInformationCard = () => {
@@ -22,7 +50,7 @@ const UserInformationCard = () => {
       ...item,
       displayValue:
         item.isSensitive && !showSensitive
-          ? maskCardValue(item.value)
+          ? maskSensitiveValue(item.value)
           : item.value,
     }));
   }, [showSensitive]);
@@ -40,7 +68,7 @@ const UserInformationCard = () => {
             </div>
 
             <p className="paragraph text-sm">
-              Your account identity and primary card details.
+              Your account identity and primary details.
             </p>
           </div>
 
@@ -53,7 +81,7 @@ const UserInformationCard = () => {
               borderColor: "var(--border)",
               color: "var(--title)",
             }}
-            aria-label={showSensitive ? "Hide card ID" : "Show card ID"}
+            aria-label={showSensitive ? "Hide user ID" : "Show user ID"}
           >
             {showSensitive ? <EyeOff size={18} /> : <Eye size={18} />}
           </button>

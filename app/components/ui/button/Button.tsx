@@ -102,7 +102,7 @@ export default function Button({
         {
           "bg-[var(--surface)] text-[var(--foreground)] border border-[var(--border)] hover:bg-[var(--surface-2)]":
             variant === "outline",
-          "border border-[var(--foreground)] bg-[var(--foreground)] text-[var(--inverse-foreground)] hover:bg-transparent hover:text-[var(--foreground)]":
+          "border border-[var(--border)] bg-gradient-to-b from-[var(--surface-2)] to-[var(--surface)] text-[var(--foreground)] shadow-sm hover:from-[var(--surface)] hover:to-[var(--surface-2)] hover:border-[var(--color-brand-400)]":
             variant === "secondary",
           "bg-transparent text-slate-300 hover:bg-white/5": variant === "ghost",
         },

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useMemo, useState } from "react";
 import Button from "@/app/components/ui/button/Button";
 import {
   Dropdown,
@@ -23,7 +23,7 @@ import {
   TableSearch,
   TableTop,
 } from "@/app/components/shared/table/Table";
-import { XCircle, CheckCheck} from "lucide-react";
+import { XCircle, CheckCheck, ArrowUpDown } from "lucide-react";
 import RefreshTimer from "./RefreshTimer";
 import {
   formatLabel,
@@ -54,8 +54,90 @@ type Props = {
   onDeleteOne: (id: string) => void;
 };
 
+type SortKey =
+  | "title"
+  | "type"
+  | "source"
+  | "severity"
+  | "createdAt"
+  | "status";
+
+type SortDirection = "asc" | "desc";
+
 const columnsClassName =
   "[grid-template-columns:72px_minmax(280px,1.7fr)_170px_120px_120px_150px_140px_130px]";
+
+const severityOrder: Record<Notification["severity"], number> = {
+  info: 1,
+  warning: 2,
+  error: 3,
+  critical: 4,
+};
+
+const statusOrder: Record<Notification["status"], number> = {
+  unread: 1,
+  read: 2,
+  resolved: 3,
+  dismissed: 4,
+};
+
+function parseNotificationDate(dateStr: string) {
+  const parsed = new Date(dateStr);
+  if (!Number.isNaN(parsed.getTime())) return parsed.getTime();
+  return 0;
+}
+
+function compareValues(
+  a: string | number,
+  b: string | number,
+  direction: SortDirection
+) {
+  let result = 0;
+
+  if (typeof a === "number" && typeof b === "number") {
+    result = a - b;
+  } else {
+    result = String(a).localeCompare(String(b), undefined, {
+      numeric: true,
+      sensitivity: "base",
+    });
+  }
+
+  return direction === "asc" ? result : -result;
+}
+
+function SortableHeader({
+  label,
+  active,
+  direction,
+  onClick,
+}: {
+  label: string;
+  active: boolean;
+  direction: SortDirection;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="inline-flex items-center gap-2 text-left text-[11px] font-semibold uppercase tracking-[0.18em] transition hover:opacity-80 sm:text-xs"
+      style={{ color: active ? "var(--title)" : "var(--muted)" }}
+    >
+      <span>{label}</span>
+      <ArrowUpDown
+        className={`h-3.5 w-3.5 transition ${
+          active ? "opacity-100" : "opacity-50"
+        }`}
+      />
+      {active && (
+        <span className="text-[10px] normal-case tracking-normal">
+          {direction === "asc" ? "Asc" : "Desc"}
+        </span>
+      )}
+    </button>
+  );
+}
 
 export default function NotificationTable({
   notifications,
@@ -73,14 +155,76 @@ export default function NotificationTable({
   onDismissOne,
   onDeleteOne,
 }: Props) {
-  const allVisibleIds = notifications.map((item) => item.id);
+  const [sortKey, setSortKey] = useState<SortKey>("createdAt");
+  const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
+
+  const handleSort = (key: SortKey) => {
+    if (sortKey === key) {
+      setSortDirection((prev) => (prev === "asc" ? "desc" : "asc"));
+      return;
+    }
+
+    setSortKey(key);
+    setSortDirection("asc");
+  };
+
+  const sortedNotifications = useMemo(() => {
+    const items = [...notifications];
+
+    items.sort((a, b) => {
+      switch (sortKey) {
+        case "title":
+          return compareValues(a.title, b.title, sortDirection);
+
+        case "type":
+          return compareValues(
+            formatTypeLabel(a.type),
+            formatTypeLabel(b.type),
+            sortDirection
+          );
+
+        case "source":
+          return compareValues(a.source, b.source, sortDirection);
+
+        case "severity":
+          return compareValues(
+            severityOrder[a.severity],
+            severityOrder[b.severity],
+            sortDirection
+          );
+
+        case "status":
+          return compareValues(
+            statusOrder[a.status],
+            statusOrder[b.status],
+            sortDirection
+          );
+
+        case "createdAt":
+          return compareValues(
+            parseNotificationDate(a.createdAt),
+            parseNotificationDate(b.createdAt),
+            sortDirection
+          );
+
+        default:
+          return 0;
+      }
+    });
+
+    return items;
+  }, [notifications, sortKey, sortDirection]);
+
+  const allVisibleIds = sortedNotifications.map((item) => item.id);
   const isAllSelected =
     allVisibleIds.length > 0 &&
     allVisibleIds.every((id) => selectedIds.includes(id));
 
   const toggleSelectAll = () => {
     if (isAllSelected) {
-      setSelectedIds((prev) => prev.filter((id) => !allVisibleIds.includes(id)));
+      setSelectedIds((prev) =>
+        prev.filter((id) => !allVisibleIds.includes(id))
+      );
       return;
     }
 
@@ -117,7 +261,9 @@ export default function NotificationTable({
             }
           >
             <DropdownTrigger className="h-12 min-w-[170px] px-5 text-base">
-              {filters.type === "all" ? "All Types" : formatTypeLabel(filters.type)}
+              {filters.type === "all"
+                ? "All Types"
+                : formatTypeLabel(filters.type)}
             </DropdownTrigger>
             <DropdownContent widthClassName="w-[220px]">
               <DropdownItem value="all">All Types</DropdownItem>
@@ -197,17 +343,18 @@ export default function NotificationTable({
               <DropdownItem value="Device">Device</DropdownItem>
               <DropdownItem value="Queue">Queue</DropdownItem>
               <DropdownItem value="System">System</DropdownItem>
-              <DropdownItem value="Report Scheduler">Report Scheduler</DropdownItem>
+              <DropdownItem value="Report Scheduler">
+                Report Scheduler
+              </DropdownItem>
             </DropdownContent>
           </Dropdown>
 
-          <RefreshTimer
-            secondsLeft={secondsLeft}
-            onRefreshNow={onRefreshNow}
-          />
+          <RefreshTimer secondsLeft={secondsLeft} onRefreshNow={onRefreshNow} />
 
           <div
-            className={selectedIds.length === 0 ? "pointer-events-none opacity-50" : ""}
+            className={
+              selectedIds.length === 0 ? "pointer-events-none opacity-50" : ""
+            }
           >
             <Dropdown
               onValueChange={(value) => {
@@ -244,15 +391,65 @@ export default function NotificationTable({
         <TableGrid minWidthClassName="min-w-[1280px]">
           <TableHeader columnsClassName={columnsClassName}>
             <TableCell className="justify-center">
-              <TableCheckbox checked={isAllSelected} onToggle={toggleSelectAll} />
+              <TableCheckbox
+                checked={isAllSelected}
+                onToggle={toggleSelectAll}
+              />
             </TableCell>
 
-            <TableHeaderCell label="Title" />
-            <TableHeaderCell label="Type" />
-            <TableHeaderCell label="Source" />
-            <TableHeaderCell label="Severity" />
-            <TableHeaderCell label="Date" />
-            <TableHeaderCell label="Status" />
+            <div>
+              <SortableHeader
+                label="Title"
+                active={sortKey === "title"}
+                direction={sortDirection}
+                onClick={() => handleSort("title")}
+              />
+            </div>
+
+            <div>
+              <SortableHeader
+                label="Type"
+                active={sortKey === "type"}
+                direction={sortDirection}
+                onClick={() => handleSort("type")}
+              />
+            </div>
+
+            <div>
+              <SortableHeader
+                label="Source"
+                active={sortKey === "source"}
+                direction={sortDirection}
+                onClick={() => handleSort("source")}
+              />
+            </div>
+
+            <div>
+              <SortableHeader
+                label="Severity"
+                active={sortKey === "severity"}
+                direction={sortDirection}
+                onClick={() => handleSort("severity")}
+              />
+            </div>
+
+            <div>
+              <SortableHeader
+                label="Date"
+                active={sortKey === "createdAt"}
+                direction={sortDirection}
+                onClick={() => handleSort("createdAt")}
+              />
+            </div>
+
+            <div>
+              <SortableHeader
+                label="Status"
+                active={sortKey === "status"}
+                direction={sortDirection}
+                onClick={() => handleSort("status")}
+              />
+            </div>
 
             <div
               className="text-[11px] font-semibold uppercase tracking-[0.18em] sm:text-xs"
@@ -263,10 +460,10 @@ export default function NotificationTable({
           </TableHeader>
 
           <TableBody>
-            {notifications.length === 0 ? (
+            {sortedNotifications.length === 0 ? (
               <TableEmptyState text="No notifications found" />
             ) : (
-              notifications.map((notification) => {
+              sortedNotifications.map((notification) => {
                 const isSelected = selectedIds.includes(notification.id);
 
                 return (
@@ -297,7 +494,9 @@ export default function NotificationTable({
                     </TableCell>
 
                     <TableCell className="min-w-0 paragraph font-medium">
-                      <span className="block truncate">{notification.source}</span>
+                      <span className="block truncate">
+                        {notification.source}
+                      </span>
                     </TableCell>
 
                     <TableCell>
@@ -309,7 +508,9 @@ export default function NotificationTable({
                     </TableCell>
 
                     <TableCell className="min-w-0 paragraph font-medium">
-                      <span className="block truncate">{notification.createdAt}</span>
+                      <span className="block truncate">
+                        {notification.createdAt}
+                      </span>
                     </TableCell>
 
                     <TableCell>

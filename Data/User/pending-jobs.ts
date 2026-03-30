@@ -21,7 +21,7 @@ export type PendingReleaseJob = {
   readinessPercent: number;
 };
 
-export const pendingReleaseBalance = 24.5;
+export const pendingReleaseQuota = 24.5;
 
 export const pendingReleaseTableColumns: {
   key: PendingReleaseSortKey;

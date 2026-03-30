@@ -739,15 +739,12 @@ import {
   IconX,
   IconChecks,
   IconDeviceFloppy,
-  IconSparkles,
 } from "@tabler/icons-react";
 import { useDropzone, type Accept } from "react-dropzone";
 import { cn } from "../../lib/cn";
 import ExpandedButton from "../button/ExpandedButton";
-import {
-  printUploadFileActions,
-  printUploadTopActions,
-} from "@/Data/User/print";
+import Button from "../button/Button";
+import { printUploadFileActions } from "@/Data/User/print";
 
 const mainVariant = {
   initial: { x: 0, y: 0 },
@@ -810,7 +807,6 @@ export const FileUpload = ({
   const [internalFiles, setInternalFiles] = useState<File[]>([]);
   const [draftMeta, setDraftMeta] = useState<DraftPayload | null>(null);
   const [draftSaved, setDraftSaved] = useState(false);
-  const [smartFixActive, setSmartFixActive] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const isControlled = value !== undefined;
@@ -927,17 +923,6 @@ export const FileUpload = ({
     setDraftMeta(null);
   };
 
-  const handleSmartFix = () => {
-    setSmartFixActive(true);
-
-    const sorted = [...files].sort((a, b) => a.name.localeCompare(b.name));
-    updateFiles(sorted);
-
-    setTimeout(() => {
-      setSmartFixActive(false);
-    }, 1200);
-  };
-
   const { getRootProps, isDragActive } = useDropzone({
     multiple,
     noClick: true,
@@ -1025,51 +1010,48 @@ export const FileUpload = ({
               )}
             </div>
 
-            <div className="flex flex-wrap items-center gap-2 md:justify-end">
-              <button
-                type="button"
-                onClick={handleClick}
-                className="btn-primary gap-2"
-              >
-                <IconPlus size={16} />
-                Add files
-              </button>
-
-              <button
-                type="button"
-                onClick={saveDraft}
-                disabled={!files.length}
-                className="btn-secondary gap-2 disabled:cursor-not-allowed disabled:opacity-50"
-              >
-                {draftSaved ? (
-                  <IconChecks size={16} />
-                ) : (
-                  <IconDeviceFloppy size={16} />
-                )}
-                {draftSaved ? "Saved" : "Save draft"}
-              </button>
-
-              <button
-                type="button"
-                onClick={handleSmartFix}
-                disabled={!files.length}
-                className="btn-secondary gap-2 disabled:cursor-not-allowed disabled:opacity-50"
-              >
-                <IconSparkles size={16} />
-                {smartFixActive ? "Fixing..." : "Smart fix"}
-              </button>
-
-              {showClearAll && files.length > 0 && (
-                <button
+            {files.length > 0 && (
+              <div className="flex flex-wrap items-center gap-2 md:justify-end">
+                <Button
                   type="button"
-                  onClick={clearFiles}
-                  className="btn-secondary gap-2"
+                  onClick={handleClick}
+                  variant="primary"
+                  size="sm"
+                  iconLeft={<IconPlus size={16} />}
                 >
-                  <IconX size={16} />
-                  Clear all
-                </button>
-              )}
-            </div>
+                  Add files
+                </Button>
+
+                <Button
+                  type="button"
+                  onClick={saveDraft}
+                  disabled={!files.length}
+                  variant="secondary"
+                  size="sm"
+                  iconLeft={
+                    draftSaved ? (
+                      <IconChecks size={16} />
+                    ) : (
+                      <IconDeviceFloppy size={16} />
+                    )
+                  }
+                >
+                  {draftSaved ? "Saved" : "Save draft"}
+                </Button>
+
+                {showClearAll && files.length > 0 && (
+                  <Button
+                    type="button"
+                    onClick={clearFiles}
+                    variant="secondary"
+                    size="sm"
+                    iconLeft={<IconX size={16} />}
+                  >
+                    Clear all
+                  </Button>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Draft Info */}
@@ -1129,7 +1111,7 @@ export const FileUpload = ({
                     damping: 20,
                   }}
                   className={cn(
-                    "relative z-40 mx-auto mt-4 flex h-32 w-full max-w-[8rem] items-center justify-center rounded-2xl border sm:h-36 sm:max-w-[9rem]",
+                    "relative z-40 mx-auto mt-4 flex h-32 w-32 items-center justify-center rounded-2xl border sm:h-36 sm:w-36",
                     disabled ? "cursor-not-allowed" : "cursor-pointer",
                     "group-hover/file:shadow-lg"
                   )}
@@ -1164,7 +1146,7 @@ export const FileUpload = ({
 
                 <motion.div
                   variants={secondaryVariant}
-                  className="absolute inset-0 z-30 mx-auto mt-4 flex h-32 w-full max-w-[8rem] items-center justify-center rounded-2xl border border-dashed sm:h-36 sm:max-w-[9rem]"
+                  className="absolute left-1/2 top-4 z-30 flex h-32 w-32 -translate-x-1/2 items-center justify-center rounded-2xl border border-dashed sm:h-36 sm:w-36"
                   style={{
                     borderColor: "var(--color-brand-400)",
                     background: "transparent",
