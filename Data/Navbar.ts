@@ -9,12 +9,12 @@
 //   RiHistoryLine,
 //   RiWallet3Line,
 //   RiUploadCloud2Line,
+//   RiLogoutBoxRLine, // ✅ logout icon
 // } from "react-icons/ri";
 // import {
 //   HiOutlineUsers,
 //   HiOutlineUserCircle,
 //   HiOutlinePrinter,
-//   HiOutlineDevicePhoneMobile,
 // } from "react-icons/hi2";
 // import { TbChecklist, TbReportSearch } from "react-icons/tb";
 // import { MdOutlinePayments } from "react-icons/md";
@@ -24,23 +24,19 @@
 //   label: string;
 //   icon: IconType;
 //   href: string;
-// };
-
-// export type SidebarSectionVideo = {
-//   title: string;
-//   description?: string;
-//   videoSrc: string;
-//   poster?: string;
+//   video?: string; // ✅ NEW
 // };
 
 // export type SidebarSection = {
 //   title: string;
 //   items: SidebarItem[];
-//   video?: SidebarSectionVideo;
 // };
 
 // export type NavbarRole = "admin" | "user";
 
+// const TEST_VIDEO = "/videos/test.mov";
+
+// /* ================= ADMIN ================= */
 // export const adminSidebarSections: SidebarSection[] = [
 //   {
 //     title: "MENU",
@@ -49,41 +45,57 @@
 //         label: "Dashboard",
 //         icon: RiDashboardFill,
 //         href: "/sections/admin/dashboard",
+//         video: TEST_VIDEO,
 //       },
-//       { label: "Users", icon: HiOutlineUsers, href: "/sections/admin/users" },
-//       { label: "Groups", icon: RiGroupLine, href: "/sections/admin/groups" },
+//       {
+//         label: "Users",
+//         icon: HiOutlineUsers,
+//         href: "/sections/admin/users",
+//         video: TEST_VIDEO,
+//       },
+//       {
+//         label: "Groups",
+//         icon: RiGroupLine,
+//         href: "/sections/admin/groups",
+//         video: TEST_VIDEO,
+//       },
 //       {
 //         label: "Accounts",
 //         icon: HiOutlineUserCircle,
 //         href: "/sections/admin/accounts",
+//         video: TEST_VIDEO,
 //       },
 //       {
 //         label: "Printers",
 //         icon: HiOutlinePrinter,
 //         href: "/sections/admin/printers",
+//         video: TEST_VIDEO,
 //       },
 //       {
 //         label: "Queue Manger",
 //         icon: BiAddToQueue,
 //         href: "/sections/admin/queue-manger",
+//         video: TEST_VIDEO,
 //       },
 //       {
 //         label: "Print Release",
 //         icon: TbChecklist,
 //         href: "/sections/admin/print-release",
+//         video: TEST_VIDEO,
 //       },
 //       {
 //         label: "Reports",
 //         icon: TbReportSearch,
 //         href: "/sections/admin/reports",
+//         video: TEST_VIDEO,
 //       },
-//       { label: "Logs", icon: RiFileList2Line, href: "/sections/admin/logs" },
+//       {
+//         label: "Logs",
+//         icon: RiFileList2Line,
+//         href: "/sections/admin/logs",
+//         video: TEST_VIDEO,
+//       },
 //     ],
-//     video: {
-//       title: "How to use Admin Menu",
-//       description: "Quick tutorial for the main admin pages and actions.",
-//       videoSrc: "video",
-//     },
 //   },
 //   {
 //     title: "ACCOUNT",
@@ -92,27 +104,27 @@
 //         label: "Notifications",
 //         icon: RiNotification3Line,
 //         href: "/sections/admin/notifications",
+//         video: TEST_VIDEO,
 //       },
 //       {
 //         label: "Settings",
 //         icon: RiSettings3Line,
 //         href: "/sections/admin/settings",
+//         video: TEST_VIDEO,
 //       },
+
+//       // ✅ NEW MAIN PAGE LINK
 //       {
-//         label: "About",
-//         icon: RiInformationLine,
-//         href: "/sections/about",
+//         label: "Main Page",
+//         icon: RiLogoutBoxRLine,
+//         href: "/",
+//         video: TEST_VIDEO,
 //       },
 //     ],
-//     video: {
-//       title: "How to use Admin Account",
-//       description:
-//         "Quick tutorial for notifications, settings, and system info.",
-//       videoSrc: "video",
-//     },
 //   },
 // ];
 
+// /* ================= USER ================= */
 // export const userSidebarSections: SidebarSection[] = [
 //   {
 //     title: "MENU",
@@ -121,49 +133,51 @@
 //         label: "Dashboard",
 //         icon: RiDashboardFill,
 //         href: "/sections/user/dashboard",
+//         video: TEST_VIDEO,
 //       },
 //       {
 //         label: "Print",
 //         icon: RiUploadCloud2Line,
 //         href: "/sections/user/print",
+//         video: TEST_VIDEO,
 //       },
 //       {
 //         label: "Recent Print Jobs",
 //         icon: RiFileList2Line,
 //         href: "/sections/user/recent-print-jobs",
+//         video: TEST_VIDEO,
 //       },
 //       {
 //         label: "Pending Jobs",
 //         icon: TbChecklist,
 //         href: "/sections/user/pending-jobs",
+//         video: TEST_VIDEO,
 //       },
 //       {
 //         label: "History",
 //         icon: RiHistoryLine,
 //         href: "/sections/user/history",
+//         video: TEST_VIDEO,
 //       },
 //       {
 //         label: "Wallet",
 //         icon: RiWallet3Line,
 //         href: "/sections/user/wallet",
+//         video: TEST_VIDEO,
 //       },
 //       {
 //         label: "Redeem",
 //         icon: MdOutlinePayments,
 //         href: "/sections/user/redeem",
+//         video: TEST_VIDEO,
 //       },
 //       {
 //         label: "Profile",
 //         icon: HiOutlineUserCircle,
 //         href: "/sections/user/profile",
+//         video: TEST_VIDEO,
 //       },
 //     ],
-//     video: {
-//       title: "How to use User Menu",
-//       description:
-//         "Quick tutorial for printing, tracking jobs, and wallet usage.",
-//       videoSrc: "video",
-//     },
 //   },
 //   {
 //     title: "SYSTEM",
@@ -172,21 +186,27 @@
 //         label: "Notifications",
 //         icon: RiNotification3Line,
 //         href: "/sections/user/notifications",
+//         video: TEST_VIDEO,
 //       },
 //       {
 //         label: "Settings",
 //         icon: RiSettings3Line,
 //         href: "/sections/user/settings",
+//         video: TEST_VIDEO,
+//       },
+
+//       // ✅ NEW MAIN PAGE LINK
+//       {
+//         label: "Main Page",
+//         icon: RiLogoutBoxRLine,
+//         href: "/",
+//         video: TEST_VIDEO,
 //       },
 //     ],
-//     video: {
-//       title: "How to use User System",
-//       description: "Quick tutorial for user notifications and settings.",
-//       videoSrc: "video",
-//     },
 //   },
 // ];
 
+// /* ================= HELPER ================= */
 // export const sidebarSectionsByRole: Record<NavbarRole, SidebarSection[]> = {
 //   admin: adminSidebarSections,
 //   user: userSidebarSections,
@@ -195,7 +215,245 @@
 // export const getDockItems = (sections: SidebarSection[]) =>
 //   sections.flatMap((section) => section.items);
 
-//============NEW===================
+//==================NEW========================
+// import type { IconType } from "react-icons";
+// import {
+//   RiDashboardFill,
+//   RiGroupLine,
+//   RiFileList2Line,
+//   RiNotification3Line,
+//   RiSettings3Line,
+//   RiHistoryLine,
+//   RiWallet3Line,
+//   RiUploadCloud2Line,
+//   RiLogoutBoxRLine,
+// } from "react-icons/ri";
+// import {
+//   HiOutlineUsers,
+//   HiOutlineUserCircle,
+//   HiOutlinePrinter,
+// } from "react-icons/hi2";
+// import { TbChecklist, TbReportSearch } from "react-icons/tb";
+// import { MdOutlinePayments } from "react-icons/md";
+// import { BiAddToQueue } from "react-icons/bi";
+
+// export type SidebarItem = {
+//   label: string;
+//   icon: IconType;
+//   href: string;
+//   lightVideoSrc?: string;
+//   darkVideoSrc?: string;
+// };
+
+// export type SidebarSection = {
+//   title: string;
+//   items: SidebarItem[];
+// };
+
+// export type NavbarRole = "admin" | "user";
+
+// const TEST_LIGHT_VIDEO = "/videos/test-light.mov";
+// const TEST_DARK_VIDEO = "/videos/test-dark.mov";
+
+// /* ================= ADMIN ================= */
+// export const adminSidebarSections: SidebarSection[] = [
+//   {
+//     title: "MENU",
+//     items: [
+//       {
+//         label: "Dashboard",
+//         icon: RiDashboardFill,
+//         href: "/sections/admin/dashboard",
+//         lightVideoSrc: TEST_LIGHT_VIDEO,
+//         darkVideoSrc: TEST_DARK_VIDEO,
+//       },
+//       {
+//         label: "Users",
+//         icon: HiOutlineUsers,
+//         href: "/sections/admin/users",
+//         lightVideoSrc: TEST_LIGHT_VIDEO,
+//         darkVideoSrc: TEST_DARK_VIDEO,
+//       },
+//       {
+//         label: "Groups",
+//         icon: RiGroupLine,
+//         href: "/sections/admin/groups",
+//         lightVideoSrc: TEST_LIGHT_VIDEO,
+//         darkVideoSrc: TEST_DARK_VIDEO,
+//       },
+//       {
+//         label: "Accounts",
+//         icon: HiOutlineUserCircle,
+//         href: "/sections/admin/accounts",
+//         lightVideoSrc: TEST_LIGHT_VIDEO,
+//         darkVideoSrc: TEST_DARK_VIDEO,
+//       },
+//       {
+//         label: "Printers",
+//         icon: HiOutlinePrinter,
+//         href: "/sections/admin/printers",
+//         lightVideoSrc: TEST_LIGHT_VIDEO,
+//         darkVideoSrc: TEST_DARK_VIDEO,
+//       },
+//       {
+//         label: "Queue Manger",
+//         icon: BiAddToQueue,
+//         href: "/sections/admin/queue-manger",
+//         lightVideoSrc: TEST_LIGHT_VIDEO,
+//         darkVideoSrc: TEST_DARK_VIDEO,
+//       },
+//       {
+//         label: "Print Release",
+//         icon: TbChecklist,
+//         href: "/sections/admin/print-release",
+//         lightVideoSrc: TEST_LIGHT_VIDEO,
+//         darkVideoSrc: TEST_DARK_VIDEO,
+//       },
+//       {
+//         label: "Reports",
+//         icon: TbReportSearch,
+//         href: "/sections/admin/reports",
+//         lightVideoSrc: TEST_LIGHT_VIDEO,
+//         darkVideoSrc: TEST_DARK_VIDEO,
+//       },
+//       {
+//         label: "Logs",
+//         icon: RiFileList2Line,
+//         href: "/sections/admin/logs",
+//         lightVideoSrc: TEST_LIGHT_VIDEO,
+//         darkVideoSrc: TEST_DARK_VIDEO,
+//       },
+//     ],
+//   },
+//   {
+//     title: "ACCOUNT",
+//     items: [
+//       {
+//         label: "Notifications",
+//         icon: RiNotification3Line,
+//         href: "/sections/admin/notifications",
+//         lightVideoSrc: TEST_LIGHT_VIDEO,
+//         darkVideoSrc: TEST_DARK_VIDEO,
+//       },
+//       {
+//         label: "Settings",
+//         icon: RiSettings3Line,
+//         href: "/sections/admin/settings",
+//         lightVideoSrc: TEST_LIGHT_VIDEO,
+//         darkVideoSrc: TEST_DARK_VIDEO,
+//       },
+//       {
+//         label: "Main Page",
+//         icon: RiLogoutBoxRLine,
+//         href: "/",
+//         lightVideoSrc: TEST_LIGHT_VIDEO,
+//         darkVideoSrc: TEST_DARK_VIDEO,
+//       },
+//     ],
+//   },
+// ];
+
+// /* ================= USER ================= */
+// export const userSidebarSections: SidebarSection[] = [
+//   {
+//     title: "MENU",
+//     items: [
+//       {
+//         label: "Dashboard",
+//         icon: RiDashboardFill,
+//         href: "/sections/user/dashboard",
+//         lightVideoSrc: TEST_LIGHT_VIDEO,
+//         darkVideoSrc: TEST_DARK_VIDEO,
+//       },
+//       {
+//         label: "Print",
+//         icon: RiUploadCloud2Line,
+//         href: "/sections/user/print",
+//         lightVideoSrc: TEST_LIGHT_VIDEO,
+//         darkVideoSrc: TEST_DARK_VIDEO,
+//       },
+//       {
+//         label: "Recent Print Jobs",
+//         icon: RiFileList2Line,
+//         href: "/sections/user/recent-print-jobs",
+//         lightVideoSrc: TEST_LIGHT_VIDEO,
+//         darkVideoSrc: TEST_DARK_VIDEO,
+//       },
+//       {
+//         label: "Pending Jobs",
+//         icon: TbChecklist,
+//         href: "/sections/user/pending-jobs",
+//         lightVideoSrc: TEST_LIGHT_VIDEO,
+//         darkVideoSrc: TEST_DARK_VIDEO,
+//       },
+//       {
+//         label: "History",
+//         icon: RiHistoryLine,
+//         href: "/sections/user/history",
+//         lightVideoSrc: TEST_LIGHT_VIDEO,
+//         darkVideoSrc: TEST_DARK_VIDEO,
+//       },
+//       {
+//         label: "Wallet",
+//         icon: RiWallet3Line,
+//         href: "/sections/user/wallet",
+//         lightVideoSrc: TEST_LIGHT_VIDEO,
+//         darkVideoSrc: TEST_DARK_VIDEO,
+//       },
+//       {
+//         label: "Redeem",
+//         icon: MdOutlinePayments,
+//         href: "/sections/user/redeem",
+//         lightVideoSrc: TEST_LIGHT_VIDEO,
+//         darkVideoSrc: TEST_DARK_VIDEO,
+//       },
+//       {
+//         label: "Profile",
+//         icon: HiOutlineUserCircle,
+//         href: "/sections/user/profile",
+//         lightVideoSrc: TEST_LIGHT_VIDEO,
+//         darkVideoSrc: TEST_DARK_VIDEO,
+//       },
+//     ],
+//   },
+//   {
+//     title: "SYSTEM",
+//     items: [
+//       {
+//         label: "Notifications",
+//         icon: RiNotification3Line,
+//         href: "/sections/user/notifications",
+//         lightVideoSrc: TEST_LIGHT_VIDEO,
+//         darkVideoSrc: TEST_DARK_VIDEO,
+//       },
+//       {
+//         label: "Settings",
+//         icon: RiSettings3Line,
+//         href: "/sections/user/settings",
+//         lightVideoSrc: TEST_LIGHT_VIDEO,
+//         darkVideoSrc: TEST_DARK_VIDEO,
+//       },
+//       {
+//         label: "Main Page",
+//         icon: RiLogoutBoxRLine,
+//         href: "/",
+//         lightVideoSrc: TEST_LIGHT_VIDEO,
+//         darkVideoSrc: TEST_DARK_VIDEO,
+//       },
+//     ],
+//   },
+// ];
+
+// /* ================= HELPER ================= */
+// export const sidebarSectionsByRole: Record<NavbarRole, SidebarSection[]> = {
+//   admin: adminSidebarSections,
+//   user: userSidebarSections,
+// };
+
+// export const getDockItems = (sections: SidebarSection[]) =>
+//   sections.flatMap((section) => section.items);
+
+// =============NEW==================
 import type { IconType } from "react-icons";
 import {
   RiDashboardFill,
@@ -203,11 +461,10 @@ import {
   RiFileList2Line,
   RiNotification3Line,
   RiSettings3Line,
-  RiInformationLine,
   RiHistoryLine,
   RiWallet3Line,
   RiUploadCloud2Line,
-  RiLogoutBoxRLine, // ✅ logout icon
+  RiLogoutBoxRLine,
 } from "react-icons/ri";
 import {
   HiOutlineUsers,
@@ -222,7 +479,8 @@ export type SidebarItem = {
   label: string;
   icon: IconType;
   href: string;
-  video?: string; // ✅ NEW
+  lightVideoSrc?: string;
+  darkVideoSrc?: string;
 };
 
 export type SidebarSection = {
@@ -231,8 +489,6 @@ export type SidebarSection = {
 };
 
 export type NavbarRole = "admin" | "user";
-
-const TEST_VIDEO = "/videos/test.mov"; // ✅ ONE SOURCE
 
 /* ================= ADMIN ================= */
 export const adminSidebarSections: SidebarSection[] = [
@@ -243,55 +499,64 @@ export const adminSidebarSections: SidebarSection[] = [
         label: "Dashboard",
         icon: RiDashboardFill,
         href: "/sections/admin/dashboard",
-        video: TEST_VIDEO,
+        lightVideoSrc: "/videos/admin/dashboard-light.mov",
+        darkVideoSrc: "/videos/admin/dashboard-dark.mov",
       },
       {
         label: "Users",
         icon: HiOutlineUsers,
         href: "/sections/admin/users",
-        video: TEST_VIDEO,
+        lightVideoSrc: "/videos/admin/users-light.mov",
+        darkVideoSrc: "/videos/admin/users-dark.mov",
       },
       {
         label: "Groups",
         icon: RiGroupLine,
         href: "/sections/admin/groups",
-        video: TEST_VIDEO,
+        lightVideoSrc: "/videos/admin/groups-light.mov",
+        darkVideoSrc: "/videos/admin/groups-dark.mov",
       },
       {
         label: "Accounts",
         icon: HiOutlineUserCircle,
         href: "/sections/admin/accounts",
-        video: TEST_VIDEO,
+        lightVideoSrc: "/videos/admin/accounts-light.mov",
+        darkVideoSrc: "/videos/admin/accounts-dark.mov",
       },
       {
         label: "Printers",
         icon: HiOutlinePrinter,
         href: "/sections/admin/printers",
-        video: TEST_VIDEO,
+        lightVideoSrc: "/videos/admin/printers-light.mov",
+        darkVideoSrc: "/videos/admin/printers-dark.mov",
       },
       {
         label: "Queue Manger",
         icon: BiAddToQueue,
         href: "/sections/admin/queue-manger",
-        video: TEST_VIDEO,
+        lightVideoSrc: "/videos/admin/queue-manager-light.mov",
+        darkVideoSrc: "/videos/admin/queue-manager-dark.mov",
       },
       {
         label: "Print Release",
         icon: TbChecklist,
         href: "/sections/admin/print-release",
-        video: TEST_VIDEO,
+        lightVideoSrc: "/videos/admin/print-release-light.mov",
+        darkVideoSrc: "/videos/admin/print-release-dark.mov",
       },
       {
         label: "Reports",
         icon: TbReportSearch,
         href: "/sections/admin/reports",
-        video: TEST_VIDEO,
+        lightVideoSrc: "/videos/admin/reports-light.mov",
+        darkVideoSrc: "/videos/admin/reports-dark.mov",
       },
       {
         label: "Logs",
         icon: RiFileList2Line,
         href: "/sections/admin/logs",
-        video: TEST_VIDEO,
+        lightVideoSrc: "/videos/admin/logs-light.mov",
+        darkVideoSrc: "/videos/admin/logs-dark.mov",
       },
     ],
   },
@@ -302,21 +567,22 @@ export const adminSidebarSections: SidebarSection[] = [
         label: "Notifications",
         icon: RiNotification3Line,
         href: "/sections/admin/notifications",
-        video: TEST_VIDEO,
+        lightVideoSrc: "/videos/admin/notifications-light.mov",
+        darkVideoSrc: "/videos/admin/notifications-dark.mov",
       },
       {
         label: "Settings",
         icon: RiSettings3Line,
         href: "/sections/admin/settings",
-        video: TEST_VIDEO,
+        lightVideoSrc: "/videos/admin/settings-light.mov",
+        darkVideoSrc: "/videos/admin/settings-dark.mov",
       },
-
-      // ✅ NEW MAIN PAGE LINK
       {
         label: "Main Page",
         icon: RiLogoutBoxRLine,
         href: "/",
-        video: TEST_VIDEO,
+        lightVideoSrc: "/videos/shared/main-page-light.mov",
+        darkVideoSrc: "/videos/shared/main-page-dark.mov",
       },
     ],
   },
@@ -331,49 +597,57 @@ export const userSidebarSections: SidebarSection[] = [
         label: "Dashboard",
         icon: RiDashboardFill,
         href: "/sections/user/dashboard",
-        video: TEST_VIDEO,
+        lightVideoSrc: "/videos/user/dashboard-light.mov",
+        darkVideoSrc: "/videos/user/dashboard-dark.mov",
       },
       {
         label: "Print",
         icon: RiUploadCloud2Line,
         href: "/sections/user/print",
-        video: TEST_VIDEO,
+        lightVideoSrc: "/videos/user/print-light.mov",
+        darkVideoSrc: "/videos/user/print-dark.mov",
       },
       {
         label: "Recent Print Jobs",
         icon: RiFileList2Line,
         href: "/sections/user/recent-print-jobs",
-        video: TEST_VIDEO,
+        lightVideoSrc: "/videos/user/recent-print-jobs-light.mov",
+        darkVideoSrc: "/videos/user/recent-print-jobs-dark.mov",
       },
       {
         label: "Pending Jobs",
         icon: TbChecklist,
         href: "/sections/user/pending-jobs",
-        video: TEST_VIDEO,
+        lightVideoSrc: "/videos/user/pending-jobs-light.mov",
+        darkVideoSrc: "/videos/user/pending-jobs-dark.mov",
       },
       {
         label: "History",
         icon: RiHistoryLine,
         href: "/sections/user/history",
-        video: TEST_VIDEO,
+        lightVideoSrc: "/videos/user/history-light.mov",
+        darkVideoSrc: "/videos/user/history-dark.mov",
       },
       {
         label: "Wallet",
         icon: RiWallet3Line,
         href: "/sections/user/wallet",
-        video: TEST_VIDEO,
+        lightVideoSrc: "/videos/user/wallet-light.mov",
+        darkVideoSrc: "/videos/user/wallet-dark.mov",
       },
       {
         label: "Redeem",
         icon: MdOutlinePayments,
         href: "/sections/user/redeem",
-        video: TEST_VIDEO,
+        lightVideoSrc: "/videos/user/redeem-light.mov",
+        darkVideoSrc: "/videos/user/redeem-dark.mov",
       },
       {
         label: "Profile",
         icon: HiOutlineUserCircle,
         href: "/sections/user/profile",
-        video: TEST_VIDEO,
+        lightVideoSrc: "/videos/user/profile-light.mov",
+        darkVideoSrc: "/videos/user/profile-dark.mov",
       },
     ],
   },
@@ -384,21 +658,22 @@ export const userSidebarSections: SidebarSection[] = [
         label: "Notifications",
         icon: RiNotification3Line,
         href: "/sections/user/notifications",
-        video: TEST_VIDEO,
+        lightVideoSrc: "/videos/user/notifications-light.mov",
+        darkVideoSrc: "/videos/user/notifications-dark.mov",
       },
       {
         label: "Settings",
         icon: RiSettings3Line,
         href: "/sections/user/settings",
-        video: TEST_VIDEO,
+        lightVideoSrc: "/videos/user/settings-light.mov",
+        darkVideoSrc: "/videos/user/settings-dark.mov",
       },
-
-      // ✅ NEW MAIN PAGE LINK
       {
         label: "Main Page",
         icon: RiLogoutBoxRLine,
         href: "/",
-        video: TEST_VIDEO,
+        lightVideoSrc: "/videos/shared/main-page-light.mov",
+        darkVideoSrc: "/videos/shared/main-page-dark.mov",
       },
     ],
   },

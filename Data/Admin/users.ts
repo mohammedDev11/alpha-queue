@@ -1,87 +1,10 @@
-// export type UserAccount = {
-//   id: string;
-//   username: string;
-//   full_name: string;
-//   balance: number;
-//   restricted: boolean;
-//   pages: number;
-//   jobs: number;
-// };
-
-// export const userAccounts: UserAccount[] = [
-//   {
-//     id: '1',
-//     username: '202322750',
-//     full_name: 'Ali Alorud',
-//     balance: 50,
-//     restricted: true,
-//     pages: 10,
-//     jobs: 4,
-//   },
-//   {
-//     id: '2',
-//     username: '202300245',
-//     full_name: 'Khalid Alqahtani',
-//     balance: 120,
-//     restricted: false,
-//     pages: 84,
-//     jobs: 5,
-//   },
-//   {
-//     id: '3',
-//     username: 'a.alshammari',
-//     full_name: 'Abdullah Alshammari',
-//     balance: 300,
-//     restricted: false,
-//     pages: 140,
-//     jobs: 9,
-//   },
-//   {
-//     id: '4',
-//     username: '202301876',
-//     full_name: 'Fahad Aldossari',
-//     balance: 0,
-//     restricted: true,
-//     pages: 0,
-//     jobs: 0,
-//   },
-//   {
-//     id: '5',
-//     username: 'a.almalki',
-//     full_name: 'Mohammed Almalki',
-//     balance: 75,
-//     restricted: false,
-//     pages: 45,
-//     jobs: 3,
-//   },
-//   {
-//     id: '6',
-//     username: '202300981',
-//     full_name: 'Saad Almutairi',
-//     balance: 20,
-//     restricted: false,
-//     pages: 30,
-//     jobs: 2,
-//   },
-//   {
-//     id: '7',
-//     username: 'a.alqahtani',
-//     full_name: 'Nasser Alqahtani',
-//     balance: 0,
-//     restricted: true,
-//     pages: 0,
-//     jobs: 0,
-//   },
-// ];
-
-//===========working===================
 // export type UserRestrictedStatus = "Locked" | "Unlocked";
 
 // export type UserAccountItem = {
 //   id: string;
 //   username: string;
 //   fullName: string;
-//   balance: number;
+//   quota: number;
 //   restricted: UserRestrictedStatus;
 //   pages: number;
 //   jobs: number;
@@ -90,7 +13,7 @@
 // export type UserSortKey =
 //   | "username"
 //   | "fullName"
-//   | "balance"
+//   | "quota"
 //   | "restricted"
 //   | "pages"
 //   | "jobs";
@@ -100,7 +23,7 @@
 //     id: "user-1",
 //     username: "202322750",
 //     fullName: "Ali Alorud",
-//     balance: 50,
+//     quota: 50,
 //     restricted: "Locked",
 //     pages: 10,
 //     jobs: 4,
@@ -109,7 +32,7 @@
 //     id: "user-2",
 //     username: "202300245",
 //     fullName: "Khalid Alqahtani",
-//     balance: 120,
+//     quota: 120,
 //     restricted: "Unlocked",
 //     pages: 84,
 //     jobs: 5,
@@ -118,7 +41,7 @@
 //     id: "user-3",
 //     username: "a.alshammari",
 //     fullName: "Abdullah Alshammari",
-//     balance: 300,
+//     quota: 300,
 //     restricted: "Unlocked",
 //     pages: 140,
 //     jobs: 9,
@@ -127,7 +50,7 @@
 //     id: "user-4",
 //     username: "202301876",
 //     fullName: "Fahad Aldossari",
-//     balance: 0,
+//     quota: 0,
 //     restricted: "Locked",
 //     pages: 0,
 //     jobs: 0,
@@ -136,7 +59,7 @@
 //     id: "user-5",
 //     username: "a.almalki",
 //     fullName: "Mohammed Almalki",
-//     balance: 75,
+//     quota: 75,
 //     restricted: "Unlocked",
 //     pages: 45,
 //     jobs: 3,
@@ -145,7 +68,7 @@
 //     id: "user-6",
 //     username: "202300981",
 //     fullName: "Saad Almutairi",
-//     balance: 20,
+//     quota: 20,
 //     restricted: "Unlocked",
 //     pages: 30,
 //     jobs: 2,
@@ -159,7 +82,7 @@
 // }[] = [
 //   { key: "username", label: "Username", sortable: true },
 //   { key: "fullName", label: "Full Name", sortable: true },
-//   { key: "balance", label: "Balance", sortable: true },
+//   { key: "quota", label: "Quota", sortable: true },
 //   { key: "restricted", label: "Restricted", sortable: true },
 //   { key: "pages", label: "Pages", sortable: true },
 //   { key: "jobs", label: "Jobs", sortable: true },
@@ -170,17 +93,42 @@
 //   Locked: 2,
 // };
 
-//========NEW=============
-export type UserRestrictedStatus = "Locked" | "Unlocked";
+//=================NEN=====================
+export type UserRestrictedStatus = "Restricted" | "Unrestricted";
+
+export type UserRole = "Student" | "Faculty" | "Staff" | "Admin";
+export type UserStanding =
+  | "Freshman"
+  | "Sophomore"
+  | "Junior"
+  | "Senior"
+  | "Graduate"
+  | "Faculty"
+  | "Staff";
+
+export type UserDepartment =
+  | "Software Engineering"
+  | "Computer Science"
+  | "Information Systems"
+  | "Cybersecurity"
+  | "Mathematics"
+  | "Deanship";
 
 export type UserAccountItem = {
   id: string;
   username: string;
   fullName: string;
+  email: string;
+  role: UserRole;
+  department: UserDepartment;
+  standing: UserStanding;
+  phone: string;
   quota: number;
   restricted: UserRestrictedStatus;
   pages: number;
   jobs: number;
+  lastActivity: string;
+  notes: string;
 };
 
 export type UserSortKey =
@@ -196,55 +144,97 @@ export const userAccountsData: UserAccountItem[] = [
     id: "user-1",
     username: "202322750",
     fullName: "Ali Alorud",
+    email: "202322750@kfupm.edu.sa",
+    role: "Student",
+    department: "Software Engineering",
+    standing: "Junior",
+    phone: "+966 50 111 2233",
     quota: 50,
-    restricted: "Locked",
+    restricted: "Restricted",
     pages: 10,
     jobs: 4,
+    lastActivity: "2026-04-08 10:24 AM",
+    notes: "Needs quota review after repeated failed print attempts.",
   },
   {
     id: "user-2",
     username: "202300245",
     fullName: "Khalid Alqahtani",
+    email: "202300245@kfupm.edu.sa",
+    role: "Student",
+    department: "Computer Science",
+    standing: "Senior",
+    phone: "+966 55 908 3311",
     quota: 120,
-    restricted: "Unlocked",
+    restricted: "Unrestricted",
     pages: 84,
     jobs: 5,
+    lastActivity: "2026-04-09 08:12 AM",
+    notes: "Frequently uses color printing for project presentations.",
   },
   {
     id: "user-3",
     username: "a.alshammari",
     fullName: "Abdullah Alshammari",
+    email: "a.alshammari@kfupm.edu.sa",
+    role: "Faculty",
+    department: "Information Systems",
+    standing: "Faculty",
+    phone: "+966 54 221 9090",
     quota: 300,
-    restricted: "Unlocked",
+    restricted: "Unrestricted",
     pages: 140,
     jobs: 9,
+    lastActivity: "2026-04-07 02:44 PM",
+    notes: "Has department-level access to faculty queue.",
   },
   {
     id: "user-4",
     username: "202301876",
     fullName: "Fahad Aldossari",
+    email: "202301876@kfupm.edu.sa",
+    role: "Student",
+    department: "Cybersecurity",
+    standing: "Junior",
+    phone: "+966 53 440 7812",
     quota: 0,
-    restricted: "Locked",
+    restricted: "Restricted",
     pages: 0,
     jobs: 0,
+    lastActivity: "2026-03-29 11:05 AM",
+    notes: "Account restricted due to insufficient balance and manual review.",
   },
   {
     id: "user-5",
     username: "a.almalki",
     fullName: "Mohammed Almalki",
+    email: "a.almalki@kfupm.edu.sa",
+    role: "Staff",
+    department: "Deanship",
+    standing: "Staff",
+    phone: "+966 56 882 1144",
     quota: 75,
-    restricted: "Unlocked",
+    restricted: "Unrestricted",
     pages: 45,
     jobs: 3,
+    lastActivity: "2026-04-06 01:17 PM",
+    notes: "Uses secure release queue for administrative printing.",
   },
   {
     id: "user-6",
     username: "202300981",
     fullName: "Saad Almutairi",
+    email: "202300981@kfupm.edu.sa",
+    role: "Student",
+    department: "Mathematics",
+    standing: "Senior",
+    phone: "+966 59 330 4477",
     quota: 20,
-    restricted: "Unlocked",
+    restricted: "Unrestricted",
     pages: 30,
     jobs: 2,
+    lastActivity: "2026-04-05 09:38 AM",
+    notes: "Low balance warning was shown last week.",
   },
 ];
 
@@ -262,6 +252,6 @@ export const userTableColumns: {
 ];
 
 export const userRestrictedSortOrder: Record<UserRestrictedStatus, number> = {
-  Unlocked: 1,
-  Locked: 2,
+  Unrestricted: 1,
+  Restricted: 2,
 };

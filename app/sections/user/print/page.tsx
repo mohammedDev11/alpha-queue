@@ -41,14 +41,16 @@ const Page = () => {
       >
         <FileUploadDemo />
 
-        <Button
-          variant="primary"
-          size="lg"
-          className="w-full rounded-md py-3 text-sm font-semibold sm:py-3.5 sm:text-base md:py-4"
-          type="submit"
-        >
-          Submit Print Job
-        </Button>
+        <div className="flex justify-center">
+          <Button
+            variant="primary"
+            size="lg"
+            className="mx-auto w-full lg:w-[90%] xl:w-[90%] 2xl:w-[90%]"
+            type="submit"
+          >
+            Submit Print Job
+          </Button>
+        </div>
       </form>
 
       <PrintJobModal

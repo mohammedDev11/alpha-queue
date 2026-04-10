@@ -101,8 +101,10 @@ function VideoPreview({
         }}
       >
         <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl">
-          <PreviewVideo src={item.video} />
-
+          <PreviewVideo
+            lightVideoSrc={item.lightVideoSrc}
+            darkVideoSrc={item.darkVideoSrc}
+          />
           <div
             className="pointer-events-none absolute inset-x-0 bottom-0 h-20"
             style={{

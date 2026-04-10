@@ -36,7 +36,7 @@ const RedeemCardBox = ({
           <h2 className="title-lg">Redeem Card</h2>
 
           <p className="paragraph mt-3 max-w-xl text-base sm:text-lg">
-            Enter your voucher code to add credit
+            Enter your voucher code to add Quota
           </p>
 
           <div className="mt-10 w-full">
@@ -64,9 +64,9 @@ const RedeemCardBox = ({
             className="mt-8 text-lg sm:text-xl"
             style={{ color: "var(--muted)" }}
           >
-            Current balance:{" "}
+            Current Quota:{" "}
             <span className="font-semibold" style={{ color: "var(--title)" }}>
-              ${currentBalance.toFixed(2)}
+              {currentBalance.toFixed(2)}
             </span>
           </p>
         </div>

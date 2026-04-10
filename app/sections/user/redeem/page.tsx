@@ -3,10 +3,10 @@ import RedeemCardBox from "./components/RedeemCardBox";
 
 const page = () => {
   return (
-    <div className="space-y-5">
+    <div className="space-y-10">
       <PageIntro
         title="Redeem Card"
-        description="Add credit to your account by entering your voucher code."
+        description="Add quota to your account by entering your voucher code."
       />{" "}
       <RedeemCardBox />
     </div>
