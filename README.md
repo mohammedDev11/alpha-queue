@@ -62,16 +62,7 @@ The system focuses on improving printing workflows while ensuring **security, co
 
 ---
 
-## 📦 Installation
-
-### 1️⃣ Clone the repository
-
-```bash
-git clone https://github.com/your-repo/ezprint.git
-cd ezprint
-```
-
-### 2️⃣ Install dependencies
+### Install dependencies
 
 ```bash
 npm install
